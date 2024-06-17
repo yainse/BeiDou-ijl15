@@ -885,3 +885,22 @@ __declspec(naked) void testingCodeCave4() {
 	}
 }
 
+
+DWORD fixMouseWheelAddr = 0x009E8090;
+DWORD fixMouseWheelRetJmpAddr = 0x009E809F;
+DWORD fixMouseWheelCallSetCursorPosAddr = 0x0059A0CB;
+__declspec(naked) void fixMouseWheelHook() {
+	__asm {
+		// is mouse wheel
+		cmp eax, 522
+		je next
+		mov eax, dword ptr ds : [edi]
+		shr eax, 0x10
+		push eax
+		movzx eax, word ptr ds : [edi]
+		push eax
+		call fixMouseWheelCallSetCursorPosAddr
+		next :
+		jmp[fixMouseWheelRetJmpAddr]
+	}
+}

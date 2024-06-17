@@ -684,3 +684,7 @@ void Client::EnableChineseInput() {
 	// 角色名中文检测
 	Memory::FillBytes(0x007A015D, 0x90, 2);
 }
+
+void Client::FixMouseWheel() {
+	Memory::CodeCave(fixMouseWheelHook, 0x009E8090, 5);
+}
