@@ -8,6 +8,7 @@ public:
 	static void UpdateLogin();
 	static void EnableChineseInput();
 	static void FixMouseWheel();
+	static void Chinese();
 	static const int m_nIGCipherHash = 0XC65053F2;
 	static int m_nGameHeight;
 	static int m_nGameWidth;
@@ -18,6 +19,7 @@ public:
 	static double setDamageCap;
 	static bool useTubi;
 	static bool bigLoginFrame;
+	static bool SwitchChinese;
 	static int speedMovementCap;
 	static std::string ServerIP_AddressFromINI;
 };

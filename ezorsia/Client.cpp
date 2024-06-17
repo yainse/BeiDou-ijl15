@@ -11,6 +11,7 @@ bool Client::RemoveLogos = true;
 double Client::setDamageCap = 199999.0;
 bool Client::useTubi = false;
 bool Client::bigLoginFrame = false;
+bool Client::SwitchChinese = false;
 int Client::speedMovementCap = 140;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
 
@@ -673,18 +674,32 @@ void Client::UpdateLogin() {	//un-used //may still contain some useful addresses
 }
 
 void Client::EnableChineseInput() {
-	// ä¸­æ–‡è¾“å…¥æ³•
+	// ÖĞÎÄÊäÈë·¨
 	Memory::FillBytes(0x008D54A6, 0x90, 9); // Key ?
 	Memory::FillBytes(0x00937225, 0x90, 9); // Chat
 	Memory::FillBytes(0x009E85FC, 0x90, 2); // IME
 	Memory::FillBytes(0x00531EE8, 0x90, 9); // Group Message
-	// å‰ªè´´æ¿æ”¯æŒä¸­æ–‡
+	// ¼ôÌù°åÖ§³ÖÖĞÎÄ
 	Memory::FillBytes(0x004CAE7D, 0x90, 2);
 	Memory::WriteByte(0x004CAE8F, 0xEB);
-	// è§’è‰²åä¸­æ–‡æ£€æµ‹
+	// ½ÇÉ«ÃûÖĞÎÄ¼ì²â
 	Memory::FillBytes(0x007A015D, 0x90, 2);
 }
 
 void Client::FixMouseWheel() {
 	Memory::CodeCave(fixMouseWheelHook, 0x009E8090, 5);
+}
+
+void Client::Chinese() {
+	if(SwitchChinese) {
+		// ÁÄÌìÀ¸Ñ¡Ïî
+		Memory::WriteString(0x00AF2B28, "¶ÔÁªÃË     ");
+
+		// ÓĞĞ§ÆÚ×ÖÌå´óĞ¡
+		Memory::WriteByte(0x008E55ED + 1, 0x0B);
+
+		// ÊôĞÔÎ»ÖÃ×ÖÌå´óĞ¡
+		Memory::WriteByte(0x008E557A + 1, 0x0B);
+		Memory::WriteByte(0x008E565E + 1, 0x0B);
+	}
 }

@@ -31,6 +31,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 			Client::setDamageCap = reader.GetReal("optional", "setDamageCap", 199999.0);
 			Client::useTubi = reader.GetBoolean("optional", "useTubi", false);
 			Client::bigLoginFrame = reader.GetBoolean("general", "bigLoginFrame", false);
+			Client::SwitchChinese = reader.GetBoolean("general", "SwitchChinese", false);
 			Client::speedMovementCap = reader.GetInteger("optional", "speedMovementCap", 140);
 			ownLoginFrame = reader.GetBoolean("optional", "ownLoginFrame", false);
 			ownCashShopFrame = reader.GetBoolean("optional", "ownCashShopFrame", false);
@@ -63,6 +64,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::UpdateResolution();
 		Client::EnableChineseInput();
 		Client::FixMouseWheel();
+		Client::Chinese();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;
 		ijl15::CreateHook(); //NMCO::CreateHook();
