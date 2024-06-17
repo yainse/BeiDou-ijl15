@@ -671,3 +671,16 @@ void Client::UpdateLogin() {	//un-used //may still contain some useful addresses
 	Memory::WriteByte(dwLoginWebHomeBtn + 1, -127); // x-pos
 	Memory::WriteByte(dwLoginWebRegisterBtn + 1, -127); // x-pos
 }
+
+void Client::EnableChineseInput() {
+	// 中文输入法
+	Memory::FillBytes(0x008D54A6, 0x90, 9); // Key ?
+	Memory::FillBytes(0x00937225, 0x90, 9); // Chat
+	Memory::FillBytes(0x009E85FC, 0x90, 2); // IME
+	Memory::FillBytes(0x00531EE8, 0x90, 9); // Group Message
+	// 剪贴板支持中文
+	Memory::FillBytes(0x004CAE7D, 0x90, 2);
+	Memory::WriteByte(0x004CAE8F, 0xEB);
+	// 角色名中文检测
+	Memory::FillBytes(0x007A015D, 0x90, 2);
+}
