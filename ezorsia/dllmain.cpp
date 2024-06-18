@@ -65,6 +65,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::EnableChineseInput();
 		Client::FixMouseWheel();
 		Client::Chinese();
+		Client::LongQuickSlot();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;
 		ijl15::CreateHook(); //NMCO::CreateHook();
