@@ -1226,3 +1226,49 @@ _declspec(naked) void Restore_Array_Expanded() //Thank you Max
 	}
 }
 // ³¤¼üÅÌ½áÊø
+
+
+DWORD fixDateFormatRtnAddr = 0x008EBF65;
+__declspec(naked) void fixDateFormat() {
+	__asm {
+		movzx   ecx, word ptr[ebp - 16h]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 1Ah]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 1Ch]
+		jmp fixDateFormatRtnAddr
+	}
+}
+DWORD fixDateFormat2RtnAddr = 0x008EBFAF;
+__declspec(naked) void fixDateFormat2() {
+	__asm {
+		movzx   ecx, word ptr[ebp - 16h]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 1Ah]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 1Ch]
+		jmp fixDateFormat2RtnAddr
+	}
+}
+DWORD fixDateFormat3RtnAddr = 0x008EC328;
+__declspec(naked) void fixDateFormat3() {
+	__asm {
+		movzx   ecx, word ptr[ebp - 1Eh]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 22h]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 24h]
+		jmp fixDateFormat3RtnAddr
+	}
+}
+DWORD fixDateFormat4RtnAddr = 0x008EBF13;
+__declspec(naked) void fixDateFormat4() {
+	__asm {
+		movzx   ecx, word ptr[ebp - 16h]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 1Ah]
+		push    ecx
+		movzx   ecx, word ptr[ebp - 1Ch]
+		jmp fixDateFormat4RtnAddr
+	}
+}

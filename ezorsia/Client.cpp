@@ -787,3 +787,13 @@ void Client::LongQuickSlot() {
 	Memory::CodeCave(DefaultQuickslotKeyMap_cave, 0x72B8E6, 5);
 	Memory::CodeCave(Restore_Array_Expanded, 0x008CFDFD, 6); //restores the skill array to 0s
 }
+
+void Client::FixDateFormat() {
+	if (SwitchChinese)
+	{
+		Memory::CodeCave(fixDateFormat, 0x008EBF57, 14); // StringPool 5273
+		Memory::CodeCave(fixDateFormat2, 0x008EBFA1, 14); // StringPool 655
+		Memory::CodeCave(fixDateFormat3, 0x008EC31A, 14); // StringPool 679
+		Memory::CodeCave(fixDateFormat4, 0x008EBF05, 14); // StringPool 3138
+	}
+}
