@@ -210,6 +210,118 @@ __declspec(naked) void CashShopFixPrev() {
 	}
 }
 
+int iHeightOfsetted1 = 0; int iWidthOfsetted1 = 0; int iTopOfsetted1 = 0; int iLeftOfsetted1 = 0;
+int iHeightOfsetted2 = 0; int iWidthOfsetted2 = 0; int iTopOfsetted2 = 0; int iLeftOfsetted2 = 0;
+int iHeightOfsetted3 = 0; int iWidthOfsetted3 = 0; int iTopOfsetted3 = 0; int iLeftOfsetted3 = 0;
+int iHeightOfsetted4 = 0; int iWidthOfsetted4 = 0; int iTopOfsetted4 = 0; int iLeftOfsetted4 = 0;
+int iHeightOfsetted5 = 0; int iWidthOfsetted5 = 0; int iTopOfsetted5 = 0; int iLeftOfsetted5 = 0;
+int iHeightOfsetted6 = 0; int iWidthOfsetted6 = 0; int iTopOfsetted6 = 0; int iLeftOfsetted6 = 0;
+int iHeightOfsetted7 = 0; int iWidthOfsetted7 = 0; int iTopOfsetted7 = 0; int iLeftOfsetted7 = 0;
+int iHeightOfsetted8 = 0; int iWidthOfsetted8 = 0; int iTopOfsetted8 = 0; int iLeftOfsetted8 = 0;
+
+__declspec(naked) void ITCFix1() {
+	__asm {
+		push	iHeightOfsetted1
+		push	iWidthOfsetted1
+		push	iTopOfsetted1
+		push	iLeftOfsetted1
+		jmp dword ptr[dwITCFix1Rtm]
+	}
+}
+
+__declspec(naked) void ITCFix2() {
+	__asm {
+		push	iHeightOfsetted2
+		push	iWidthOfsetted2
+		push	iTopOfsetted2
+		push	iLeftOfsetted2
+		jmp dword ptr[dwITCFix2Rtm]
+	}
+}
+
+__declspec(naked) void ITCFix3() {
+	__asm {
+		push	iHeightOfsetted3
+		push	iWidthOfsetted3
+		push	iTopOfsetted3
+		push	iLeftOfsetted3
+		jmp dword ptr[dwITCFix3Rtm]
+	}
+}
+
+__declspec(naked) void ITCFix4() {
+	__asm {
+		push	iHeightOfsetted4
+		push	iWidthOfsetted4
+		push	iTopOfsetted4
+		push	iLeftOfsetted4
+		jmp dword ptr[dwITCFix4Rtm]
+	}
+}
+
+__declspec(naked) void ITCFix5() {
+	__asm {
+		push    10
+		push	iHeightOfsetted5
+		push	iWidthOfsetted5
+		push	iTopOfsetted5
+		push	iLeftOfsetted5
+		jmp dword ptr[dwITCFix5Rtm]
+	}
+}
+
+__declspec(naked) void ITCFix6() {
+	__asm {
+		push	iHeightOfsetted6
+		push	iWidthOfsetted6
+		push	iTopOfsetted6
+		push	iLeftOfsetted6
+		jmp dword ptr[dwITCFix6Rtm]
+	}
+}
+
+__declspec(naked) void ITCFix7() {
+	__asm {
+		push	iHeightOfsetted7
+		push	iWidthOfsetted7
+		push	iTopOfsetted7
+		push	iLeftOfsetted7
+		jmp dword ptr[dwITCFix7Rtm]
+	}
+}
+
+__declspec(naked) void ITCFix8() {
+	__asm {
+		push	iHeightOfsetted8
+		push	iWidthOfsetted8
+		push	iTopOfsetted8
+		push	iLeftOfsetted8
+		jmp dword ptr[dwITCFix8Rtm]
+	}
+}
+
+__declspec(naked) void ITCFixOnOff() {	//could be improved upon because idk if it's the right way to do it or if it might cause issues
+	__asm {
+		pop	ebx
+		push ecx
+		mov ecx, dword ptr[dwCashFixOnOffCall]
+		call ecx
+		add esp, 4
+		leave
+		retn    4
+	}
+}
+int iHeightOfsettedPrev = 0; int iWidthOfsettedPrev = 0; int iTopOfsettedPrev = 0; int iLeftOfsettedPrev = 0;
+__declspec(naked) void ITCFixPrev() {
+	__asm {
+		push	iHeightOfsettedPrev
+		push	iWidthOfsettedPrev
+		push	iTopOfsettedPrev
+		push	iLeftOfsettedPrev
+		jmp dword ptr[dwCashFixPrevRtm]
+	}
+}
+
 int nTopOfsettedVerFix = 0; int nLeftOfsettedVerFix = 0;
 
 __declspec(naked) void VersionNumberFix() {
