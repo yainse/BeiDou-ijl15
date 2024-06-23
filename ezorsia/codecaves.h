@@ -1384,3 +1384,43 @@ __declspec(naked) void fixDateFormat4() {
 		jmp fixDateFormat4RtnAddr
 	}
 }
+
+DWORD getItemType2Addr = 0x005CFAC2;
+__declspec(naked) void getItemType1() {
+	__asm {
+		jmp getItemType2Addr
+	}
+}
+
+DWORD getItemType2ErrRtnAddr = 0x005CFAA8;
+DWORD getItemType2RtnAddr = 0x005CFADD;
+__declspec(naked) void getItemType2() {
+	__asm {
+		dec eax
+		jz label_eqp
+		dec eax
+		jz label_use
+		dec eax
+		jz label_ins
+		dec eax
+		jz label_etc
+		dec eax
+		jz label_cash
+		jmp getItemType2ErrRtnAddr
+	label_cash:
+		push 0x159C
+		jmp getItemType2RtnAddr
+	label_etc:
+		push 0x6DD
+		jmp getItemType2RtnAddr
+	label_ins:
+		push 0x0B
+		jmp getItemType2RtnAddr
+	label_use:
+		push 0x6E3
+		jmp getItemType2RtnAddr
+	label_eqp:
+		push 0x6D9
+		jmp getItemType2RtnAddr
+	}
+}

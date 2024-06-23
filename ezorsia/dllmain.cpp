@@ -67,6 +67,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::Chinese();
 		Client::LongQuickSlot();
 		Client::FixDateFormat();
+		Client::FixItemType();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;
 		ijl15::CreateHook(); //NMCO::CreateHook();

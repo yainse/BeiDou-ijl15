@@ -817,3 +817,11 @@ void Client::FixDateFormat() {
 		Memory::CodeCave(fixDateFormat4, 0x008EBF05, 14); // StringPool 3138
 	}
 }
+
+void Client::FixItemType() {
+	if (SwitchChinese)
+	{
+		Memory::CodeCave(getItemType1, 0x005CFA99, 15);
+		Memory::CodeCave(getItemType2, getItemType2Addr, 27);
+	}
+}
