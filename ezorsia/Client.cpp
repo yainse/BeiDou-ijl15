@@ -706,9 +706,6 @@ void Client::EnableChineseInput() {
 	Memory::WriteByte(0x004CAE8F, 0xEB);
 	// 角色名中文检测
 	Memory::FillBytes(0x007A015D, 0x90, 2);
-
-	Memory::WriteByte(0x81C512 + 1, 0x149); // Inventory wnd height
-	Memory::WriteByte(0x81C517 + 2, 0xBC); // Inventory wnd width
 }
 
 void Client::FixMouseWheel() {
