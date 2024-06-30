@@ -300,28 +300,6 @@ __declspec(naked) void ITCFix8() {
 	}
 }
 
-__declspec(naked) void ITCFixOnOff() {	//could be improved upon because idk if it's the right way to do it or if it might cause issues
-	__asm {
-		pop	ebx
-		push ecx
-		mov ecx, dword ptr[dwCashFixOnOffCall]
-		call ecx
-		add esp, 4
-		leave
-		retn    4
-	}
-}
-int iHeightOfsettedPrev = 0; int iWidthOfsettedPrev = 0; int iTopOfsettedPrev = 0; int iLeftOfsettedPrev = 0;
-__declspec(naked) void ITCFixPrev() {
-	__asm {
-		push	iHeightOfsettedPrev
-		push	iWidthOfsettedPrev
-		push	iTopOfsettedPrev
-		push	iLeftOfsettedPrev
-		jmp dword ptr[dwCashFixPrevRtm]
-	}
-}
-
 int nTopOfsettedVerFix = 0; int nLeftOfsettedVerFix = 0;
 
 __declspec(naked) void VersionNumberFix() {
@@ -1422,5 +1400,36 @@ __declspec(naked) void getItemType2() {
 	label_eqp:
 		push 0x6D9
 		jmp getItemType2RtnAddr
+	}
+}
+
+
+DWORD enableImeAddr = 0x009E85F3;
+DWORD fixImeReturnAddr = 0x004CA08F;
+DWORD fixIme2ReturnAddr = 0x004CA061;
+DWORD fixIme2JzAddr = 0x004CA078;
+__declspec(naked) void fixIME() {
+	__asm {
+		cmp[esp + 0Ch], edi
+		jz label_jz
+		push 1
+		call enableImeAddr
+		jmp fixImeReturnAddr
+
+		label_jz:
+		push 0
+		call enableImeAddr
+		jmp fixImeReturnAddr
+	}
+}
+
+__declspec(naked) void fixIME2() {
+	__asm {
+		cmp[esp+0Ch], edi
+		jz label_fixImeOriginAddr
+		jmp fixIme2ReturnAddr
+		label_fixImeOriginAddr :
+		mov eax, fixIme2JzAddr
+		jmp eax
 	}
 }

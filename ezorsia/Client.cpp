@@ -697,13 +697,18 @@ void Client::EnableChineseInput() {
 	// 中文输入法
 	Memory::FillBytes(0x008D54A6, 0x90, 9); // Key ?
 	Memory::FillBytes(0x00937225, 0x90, 9); // Chat
-	Memory::FillBytes(0x009E85FC, 0x90, 2); // IME
+	//Memory::FillBytes(0x009E85FC, 0x90, 2); // IME
+	Memory::CodeCave(fixIME, 0x004CA089, 6);
+	Memory::CodeCave(fixIME2, 0x004CA05B, 6);
 	Memory::FillBytes(0x00531EE8, 0x90, 9); // Group Message
 	// 剪贴板支持中文
 	Memory::FillBytes(0x004CAE7D, 0x90, 2);
 	Memory::WriteByte(0x004CAE8F, 0xEB);
 	// 角色名中文检测
 	Memory::FillBytes(0x007A015D, 0x90, 2);
+
+	Memory::WriteByte(0x81C512 + 1, 0x149); // Inventory wnd height
+	Memory::WriteByte(0x81C517 + 2, 0xBC); // Inventory wnd width
 }
 
 void Client::FixMouseWheel() {
