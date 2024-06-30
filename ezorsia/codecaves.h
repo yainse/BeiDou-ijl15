@@ -1407,25 +1407,29 @@ __declspec(naked) void getItemType2() {
 DWORD enableImeAddr = 0x009E85F3;
 DWORD fixImeReturnAddr = 0x004CA08F;
 DWORD fixIme2ReturnAddr = 0x004CA061;
+DWORD fixIme3ReturnAddr = 0x004CA091;
 DWORD fixIme2JzAddr = 0x004CA078;
 __declspec(naked) void fixIME() {
 	__asm {
-		cmp[esp + 0Ch], edi
-		jz label_jz
-		push 1
+		cmp  [esp + 0Ch], edi
+		jz   label_jz
+		xor  eax, eax
+		cmp  [esi + 0x80], eax
+		setz al
+		push eax
 		call enableImeAddr
-		jmp fixImeReturnAddr
+		jmp  fixImeReturnAddr
 
 		label_jz:
 		push 0
 		call enableImeAddr
-		jmp fixImeReturnAddr
+		jmp  fixIme3ReturnAddr
 	}
 }
 
 __declspec(naked) void fixIME2() {
 	__asm {
-		cmp[esp+0Ch], edi
+		cmp [esp + 0Ch], edi
 		jz label_fixImeOriginAddr
 		jmp fixIme2ReturnAddr
 		label_fixImeOriginAddr :
