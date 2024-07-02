@@ -1406,9 +1406,7 @@ __declspec(naked) void getItemType2() {
 
 DWORD enableImeAddr = 0x009E85F3;
 DWORD fixImeReturnAddr = 0x004CA08F;
-DWORD fixIme2ReturnAddr = 0x004CA061;
-DWORD fixIme3ReturnAddr = 0x004CA091;
-DWORD fixIme2JzAddr = 0x004CA078;
+DWORD fixImeReturn2Addr = 0x004CA091;
 __declspec(naked) void fixIME() {
 	__asm {
 		cmp  [esp + 0Ch], edi
@@ -1423,10 +1421,13 @@ __declspec(naked) void fixIME() {
 		label_jz:
 		push 0
 		call enableImeAddr
-		jmp  fixIme3ReturnAddr
+		jmp  fixImeReturn2Addr
 	}
 }
 
+
+DWORD fixIme2ReturnAddr = 0x004CA061;
+DWORD fixIme2JzAddr = 0x004CA078;
 __declspec(naked) void fixIME2() {
 	__asm {
 		cmp [esp + 0Ch], edi
@@ -1435,5 +1436,22 @@ __declspec(naked) void fixIME2() {
 		label_fixImeOriginAddr :
 		mov eax, fixIme2JzAddr
 		jmp eax
+	}
+}
+
+DWORD fixIme3ReturnAddr = 0x004D32E0;
+DWORD fixIme3Return2Addr = 0x004D32E2;
+__declspec(naked) void fixIME3() {
+	__asm {
+		cmp  dword ptr[esp + 8], 0
+		jz   label_jz
+		push 1
+		call enableImeAddr
+		jmp  fixIme3ReturnAddr
+
+		label_jz :
+		push 0
+		call enableImeAddr
+		jmp  fixIme3Return2Addr
 	}
 }

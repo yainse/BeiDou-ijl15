@@ -698,8 +698,13 @@ void Client::EnableChineseInput() {
 	Memory::FillBytes(0x008D54A6, 0x90, 9); // Key ?
 	Memory::FillBytes(0x00937225, 0x90, 9); // Chat
 	//Memory::FillBytes(0x009E85FC, 0x90, 2); // IME
+	// 单行选框OnSetFocus@CCtrlEdit
 	Memory::CodeCave(fixIME, 0x004CA089, 6);
 	Memory::CodeCave(fixIME2, 0x004CA05B, 6);
+	// 多行输入框OnSetFocus@CCtrlMLEdit
+	Memory::FillBytes(0x004D32C6, 0x90, 2);
+	Memory::CodeCave(fixIME3, 0x004D32D9, 7);
+
 	Memory::FillBytes(0x00531EE8, 0x90, 9); // Group Message
 	// 剪贴板支持中文
 	Memory::FillBytes(0x004CAE7D, 0x90, 2);
