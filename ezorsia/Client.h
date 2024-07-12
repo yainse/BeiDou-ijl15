@@ -12,6 +12,7 @@ public:
 	static void LongQuickSlot();
 	static void FixDateFormat();
 	static void FixItemType();
+	static void JumpCap();
 	static const int m_nIGCipherHash = 0XC65053F2;
 	static int m_nGameHeight;
 	static int m_nGameWidth;
@@ -28,5 +29,6 @@ public:
 	static bool bigLoginFrame;
 	static bool SwitchChinese;
 	static int speedMovementCap;
+	static DWORD jumpCap;
 	static std::string ServerIP_AddressFromINI;
 };

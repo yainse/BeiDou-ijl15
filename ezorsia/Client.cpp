@@ -850,3 +850,11 @@ void Client::FixItemType() {
 		Memory::CodeCave(getItemType2, getItemType2Addr, 27);
 	}
 }
+
+DWORD Client::jumpCap = 123;
+
+void Client::JumpCap() {
+	Memory::CodeCave(customJumpCapHook1, 0x00780797, 10);
+	Memory::CodeCave(customJumpCapHook2, 0x008C42A3, 10);
+	Memory::CodeCave(customJumpCapHook3, 0x0094D942, 5);
+}

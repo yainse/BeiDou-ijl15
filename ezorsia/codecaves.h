@@ -1455,3 +1455,44 @@ __declspec(naked) void fixIME3() {
 		jmp  fixIme3Return2Addr
 	}
 }
+
+const DWORD back1 = 0x007807A1;
+__declspec(naked) void customJumpCapHook1()
+{
+	__asm {
+		cmp eax, Client::jumpCap
+		jl label
+		push Client::jumpCap
+		pop eax
+	label:
+		mov edx, edi
+		jmp[back1]
+	}
+}
+
+
+const DWORD back2 = 0x008C42AD;
+const DWORD back3 = 0x008C42AF;
+__declspec(naked) void customJumpCapHook2()
+{
+	__asm {
+		cmp eax, Client::jumpCap
+		jle label
+		push Client::jumpCap
+		pop edi
+		jmp[back3]
+		label:
+		jmp[back2]
+	}
+}
+
+const DWORD back4 = 0x0094D947;
+__declspec(naked) void customJumpCapHook3()
+{
+	__asm {
+		push Client::jumpCap
+		pop ecx
+		cmp eax, ecx
+		jmp[back4]
+	}
+}
