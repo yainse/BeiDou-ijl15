@@ -138,6 +138,9 @@
     <ClInclude Include="ijl15.h">
       <Filter>Header Files\innerH</Filter>
     </ClInclude>
+    <ClInclude Include="BossHP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -160,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="ijl15.cpp">
       <Filter>Source Files\innerH</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHP.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

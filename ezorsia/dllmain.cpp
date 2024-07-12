@@ -5,6 +5,7 @@
 #include "INIReader.h"
 #include "ReplacementFuncs.h"
 #include <comutil.h>
+#include "BossHP.h"
 
 void CreateConsole() {
 	AllocConsole();
@@ -72,6 +73,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::LongQuickSlot();
 		Client::FixDateFormat();
 		Client::FixItemType();
+		BossHP::Hook();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;
 		ijl15::CreateHook(); //NMCO::CreateHook();

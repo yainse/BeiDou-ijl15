@@ -171,6 +171,7 @@
     <ClInclude Include="AddyLocations.h">
       <FileType>CppHeader</FileType>
     </ClInclude>
+    <ClInclude Include="BossHP.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="ijl15.h" />
     <ClInclude Include="MapleClientCollectionTypes\TSecType.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BossHP.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ijl15.cpp" />
     <ClCompile Include="ZAllocEx.cpp" />
