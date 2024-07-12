@@ -128,9 +128,7 @@ void Client::UpdateGameStartup() {
 
 	Memory::WriteInt(0x0077E055 + 1, 2147483646); // 物攻PAD 相关具体不明，默认值1999，int 4字节
 	Memory::WriteInt(0x0077E12F + 1, 2147483646); // 技能 相关具体不明，默认值1999，int 4字节
-
 	Memory::WriteInt(0x008C3304 + 1, setDamageCap); // 物攻面板，默认值199999，int 4字节
-
 	Memory::WriteInt(0x0077E215 + 1, setMAtkCap); // 魔攻面板，int 4字节
 	Memory::WriteInt(0x00780620 + 1, setMAtkCap); // 魔攻面板，int 4字节
 	Memory::WriteInt(0x007806D0 + 1, setAccCap); // 命中，默认999
@@ -138,8 +136,12 @@ void Client::UpdateGameStartup() {
 	Memory::WriteInt(0x0078FF5F + 1, 2147483646); // 计算物理伤害相关，意义不明，默认1999，int 4字节
 	Memory::WriteInt(0x0079166C + 1, 2147483646); // 计算魔攻MDamage的，默认值1999，int 4字节，注意：这里不改的话，打怪输出计算的魔法伤害就是按1999计算的
 	Memory::WriteInt(0x00791CD5 + 1, 2147483646); // 计算魔攻MDamage的，默认值1999，int 4字节，注意：这里不改似乎也不影响输出计算
+	Memory::WriteInt(0x0078E061 + 1, 2147483646); //CalcDamage::PDamage 999，意义不明，int 4字节
+	Memory::WriteInt(0x0078E67D + 1, 2147483646); //CalcDamage::PDamage 999，意义不明，int 4字节
+	Memory::WriteInt(0x007918FC + 1, 2147483646); //CalcDamage::MDamage 999，意义不明，int 4字节
 
 	Memory::WriteDouble(0x00AFE8A0, setAtkOutCap);	// 输出显示上限，默认199999，double 8字节
+
 
 	Memory::WriteInt(0x00780743 + 3, speedMovementCap); //set speed cap //ty ronan
 	Memory::WriteInt(0x008C4286 + 1, speedMovementCap); //set speed cap //ty ronan
