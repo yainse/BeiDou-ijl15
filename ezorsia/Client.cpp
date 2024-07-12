@@ -9,6 +9,8 @@ bool Client::CustomLoginFrame = true;
 bool Client::WindowedMode = true;
 bool Client::RemoveLogos = true;
 double Client::setDamageCap = 199999.0;
+short Client::setMAtkCap = 1999;
+double Client::setAtkOutCap = 199999.0;
 bool Client::useTubi = false;
 bool Client::bigLoginFrame = false;
 bool Client::SwitchChinese = false;
@@ -121,9 +123,14 @@ void Client::UpdateGameStartup() {
 
 	//optional non-resolution related stuff
 	if (useTubi) { Memory::FillBytes(0x00485C32, 0x90, 2); }
-	Memory::WriteDouble(0x00AFE8A0, setDamageCap);	//ty rain
+
 	int setDamageCapInt = static_cast<int>(setDamageCap < 0 ? setDamageCap - 0.5 : setDamageCap + 0.5);
-	Memory::WriteInt(0x008C3304 + 1, setDamageCapInt); //ty rain
+	Memory::WriteInt(0x008C3304 + 1, setDamageCapInt);
+	
+	Memory::WriteShort(0x0077E215 + 1, setMAtkCap);
+	Memory::WriteShort(0x00780620 + 1, setMAtkCap);
+
+	Memory::WriteDouble(0x00AFE8A0, setAtkOutCap);	//ty rain
 
 	Memory::WriteInt(0x00780743 + 3, speedMovementCap); //set speed cap //ty ronan
 	Memory::WriteInt(0x008C4286 + 1, speedMovementCap); //set speed cap //ty ronan

@@ -29,6 +29,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 			Client::RemoveLogos = reader.GetBoolean("general", "RemoveLogos", true);
 			Memory::UseVirtuProtect = reader.GetBoolean("general", "UseVirtuProtect", true);
 			Client::setDamageCap = reader.GetReal("optional", "setDamageCap", 199999.0);
+			Client::setMAtkCap = reader.GetReal("optional", "setMAtkCap", 1999);
+			Client::setAtkOutCap = reader.GetReal("optional", "setAtkOutCap", 199999.0);
 			Client::useTubi = reader.GetBoolean("optional", "useTubi", false);
 			Client::bigLoginFrame = reader.GetBoolean("general", "bigLoginFrame", false);
 			Client::SwitchChinese = reader.GetBoolean("general", "SwitchChinese", false);

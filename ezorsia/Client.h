@@ -20,6 +20,8 @@ public:
 	static bool WindowedMode;
 	static bool RemoveLogos;
 	static double setDamageCap;
+	static short setMAtkCap;
+	static double setAtkOutCap;
 	static bool useTubi;
 	static bool bigLoginFrame;
 	static bool SwitchChinese;
