@@ -19,8 +19,10 @@ public:
 	static bool CustomLoginFrame;
 	static bool WindowedMode;
 	static bool RemoveLogos;
-	static double setDamageCap;
-	static short setMAtkCap;
+	static int setDamageCap;
+	static int setMAtkCap;
+	static int setAccCap;
+	static int setAvdCap;
 	static double setAtkOutCap;
 	static bool useTubi;
 	static bool bigLoginFrame;

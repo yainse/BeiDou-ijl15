@@ -8,9 +8,11 @@ int Client::MsgAmount = 26;
 bool Client::CustomLoginFrame = true;
 bool Client::WindowedMode = true;
 bool Client::RemoveLogos = true;
-double Client::setDamageCap = 199999.0;
-short Client::setMAtkCap = 1999;
-double Client::setAtkOutCap = 199999.0;
+int Client::setDamageCap = 199999;
+int Client::setMAtkCap = 1999;
+int Client::setAccCap = 999;
+int Client::setAvdCap = 999;
+double Client::setAtkOutCap = 199999;
 bool Client::useTubi = false;
 bool Client::bigLoginFrame = false;
 bool Client::SwitchChinese = false;
@@ -124,13 +126,20 @@ void Client::UpdateGameStartup() {
 	//optional non-resolution related stuff
 	if (useTubi) { Memory::FillBytes(0x00485C32, 0x90, 2); }
 
-	int setDamageCapInt = static_cast<int>(setDamageCap < 0 ? setDamageCap - 0.5 : setDamageCap + 0.5);
-	Memory::WriteInt(0x008C3304 + 1, setDamageCapInt);
-	
-	Memory::WriteShort(0x0077E215 + 1, setMAtkCap);
-	Memory::WriteShort(0x00780620 + 1, setMAtkCap);
+	Memory::WriteInt(0x0077E055 + 1, 2147483646); // 物攻PAD 相关具体不明，默认值1999，int 4字节
+	Memory::WriteInt(0x0077E12F + 1, 2147483646); // 技能 相关具体不明，默认值1999，int 4字节
 
-	Memory::WriteDouble(0x00AFE8A0, setAtkOutCap);	//ty rain
+	Memory::WriteInt(0x008C3304 + 1, setDamageCap); // 物攻面板，默认值199999，int 4字节
+
+	Memory::WriteInt(0x0077E215 + 1, setMAtkCap); // 魔攻面板，int 4字节
+	Memory::WriteInt(0x00780620 + 1, setMAtkCap); // 魔攻面板，int 4字节
+	Memory::WriteInt(0x007806D0 + 1, setAccCap); // 命中，默认999
+	Memory::WriteInt(0x00780702 + 1, setAvdCap); // 回避，默认999
+	Memory::WriteInt(0x0078FF5F + 1, 2147483646); // 计算物理伤害相关，意义不明，默认1999，int 4字节
+	Memory::WriteInt(0x0079166C + 1, 2147483646); // 计算魔攻MDamage的，默认值1999，int 4字节，注意：这里不改的话，打怪输出计算的魔法伤害就是按1999计算的
+	Memory::WriteInt(0x00791CD5 + 1, 2147483646); // 计算魔攻MDamage的，默认值1999，int 4字节，注意：这里不改似乎也不影响输出计算
+
+	Memory::WriteDouble(0x00AFE8A0, setAtkOutCap);	// 输出显示上限，默认199999，double 8字节
 
 	Memory::WriteInt(0x00780743 + 3, speedMovementCap); //set speed cap //ty ronan
 	Memory::WriteInt(0x008C4286 + 1, speedMovementCap); //set speed cap //ty ronan
