@@ -746,6 +746,10 @@ void Client::Chinese() {
 		// 属性位置字体大小
 		Memory::WriteByte(0x008E557A + 1, 0x0B);
 		Memory::WriteByte(0x008E565E + 1, 0x0B);
+
+		// 玩家名片 职业字体大小和位置
+		Memory::WriteByte(0x0090142E + 1, 0x5E); // 60->5E 位置上移
+		Memory::WriteByte(0x00901400 + 1, 1); // 字体type改为1 对应12号大小
 	}
 }
 
