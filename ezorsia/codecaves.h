@@ -1496,3 +1496,28 @@ __declspec(naked) void customJumpCapHook3()
 		jmp[back4]
 	}
 }
+
+const DWORD chatTextPosRtn = 0x008DD075;
+__declspec(naked) void chatTextPos()
+{
+	__asm {
+		add eax, [edi + 0CFCh]
+		cmp[edi + 0D00h], 3
+		jz label_type3
+		cmp[edi + 0D00h], 2
+		jz label_type2
+
+		label_type1 :        // 状态1 收缩
+		sub eax, 1
+		jmp label_rtn
+
+		label_type2 :        // 状态2 收缩 + 输入
+		jmp label_rtn
+
+		label_type3 :        // 状态3 展开
+		sub eax, 2
+
+		label_rtn :
+		jmp chatTextPosRtn
+	}
+}

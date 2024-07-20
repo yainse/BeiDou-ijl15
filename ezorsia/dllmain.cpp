@@ -75,6 +75,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::FixDateFormat();
 		Client::FixItemType();
 		Client::JumpCap();
+		Client::FixChatPosHook();
 		BossHP::Hook();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;

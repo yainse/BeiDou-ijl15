@@ -862,3 +862,11 @@ void Client::JumpCap() {
 	Memory::CodeCave(customJumpCapHook2, 0x008C42A3, 10);
 	Memory::CodeCave(customJumpCapHook3, 0x0094D942, 5);
 }
+
+void Client::FixChatPosHook() {
+	// 修复聊天窗里的聊天信息偏下的问题
+	// Memory::WriteByte(0x008DD05A + 2, 0x4);
+	// Memory::WriteByte(0x008DD067 + 2, 0x3);
+	// 老方法导致收起聊天框时，显示的信息太偏下了
+	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
+}
