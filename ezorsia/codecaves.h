@@ -1456,6 +1456,35 @@ __declspec(naked) void fixIME3() {
 	}
 }
 
+DWORD fixIME4Rtn = 0x004CA08F;
+__declspec(naked) void fixIME4() {
+	__asm {
+		cmp[esi + 0x80], 1 // ≈–∂œ «∑Ò√‹¬ÎøÚ
+		jz label_disable
+		push 1
+		call enableImeAddr
+		jmp fixIME4Rtn
+
+		label_disable :
+		call Client::disableIME
+		jmp fixIME4
+	}
+}
+
+DWORD fixIME5Rtn = 0x004DFEAD;
+DWORD fixIME5FuncAddr = 0x0041FE69;
+__declspec(naked) void fixIME5() {
+	__asm {
+		call fixIME5FuncAddr
+		or dword ptr[esi + 14h], 0FFFFFFFFh
+
+		call Client::disableIME
+
+		label_return :
+		jmp fixIME5Rtn
+	}
+}
+
 const DWORD back1 = 0x007807A1;
 __declspec(naked) void customJumpCapHook1()
 {

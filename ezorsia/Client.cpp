@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "AddyLocations.h"
 #include "codecaves.h"
+#include <imm.h>
+#pragma comment(lib, "imm32.lib")
 
 int Client::m_nGameHeight = 720;
 int Client::m_nGameWidth = 1280;
@@ -716,12 +718,10 @@ void Client::EnableChineseInput() {
 	Memory::FillBytes(0x008D54A6, 0x90, 9); // Key ?
 	Memory::FillBytes(0x00937225, 0x90, 9); // Chat
 	//Memory::FillBytes(0x009E85FC, 0x90, 2); // IME
-	// 单行选框OnSetFocus@CCtrlEdit
-	Memory::CodeCave(fixIME, 0x004CA089, 6);
-	Memory::CodeCave(fixIME2, 0x004CA05B, 6);
-	// 多行输入框OnSetFocus@CCtrlMLEdit
-	Memory::FillBytes(0x004D32C6, 0x90, 2);
-	Memory::CodeCave(fixIME3, 0x004D32D9, 7);
+	
+	Memory::CodeCave(fixIME4, 0x004CA089, 6); // 单行
+	Memory::CodeCave(fixIME5, 0x004DFEA4, 9); // 销毁
+	Memory::WriteByte(0x004D32D9 + 1, 1); // 多行输入
 
 	Memory::FillBytes(0x00531EE8, 0x90, 9); // Group Message
 	// 剪贴板支持中文
@@ -729,6 +729,17 @@ void Client::EnableChineseInput() {
 	Memory::WriteByte(0x004CAE8F, 0xEB);
 	// 角色名中文检测
 	Memory::FillBytes(0x007A015D, 0x90, 2);
+}
+
+void Client::disableIME() {
+	HWND hwnd = GetForegroundWindow();
+	if (hwnd) {
+		HIMC hImc = ImmGetContext(hwnd);
+		if (hImc) {
+			ImmAssociateContext(hwnd, NULL);
+			ImmReleaseContext(hwnd, hImc);
+		}
+	}
 }
 
 void Client::FixMouseWheel() {
