@@ -39,6 +39,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 			Client::SwitchChinese = reader.GetBoolean("general", "SwitchChinese", false);
 			Client::speedMovementCap = reader.GetInteger("optional", "speedMovementCap", 140);
 			Client::jumpCap = reader.GetInteger("optional", "jumpCap", 123);
+			Client::debug = reader.GetBoolean("debug", "debug", false);
+			Client::noPassword = reader.GetBoolean("debug", "noPassword", false);
 			ownLoginFrame = reader.GetBoolean("optional", "ownLoginFrame", false);
 			ownCashShopFrame = reader.GetBoolean("optional", "ownCashShopFrame", false);
 			EzorsiaV2WzIncluded = reader.GetBoolean("general", "EzorsiaV2WzIncluded", true);
@@ -76,6 +78,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::FixItemType();
 		Client::JumpCap();
 		Client::FixChatPosHook();
+		Client::NoPassword();
 		BossHP::Hook();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;

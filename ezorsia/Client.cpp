@@ -19,6 +19,8 @@ bool Client::useTubi = false;
 bool Client::bigLoginFrame = false;
 bool Client::SwitchChinese = false;
 int Client::speedMovementCap = 140;
+bool Client::noPassword = false;
+bool Client::debug = false;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
 
 void Client::UpdateGameStartup() {
@@ -880,4 +882,11 @@ void Client::FixChatPosHook() {
 	// Memory::WriteByte(0x008DD067 + 2, 0x3);
 	// 老方法导致收起聊天框时，显示的信息太偏下了
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
+}
+
+void Client::NoPassword() {
+	if (noPassword && debug)
+	{
+		Memory::WriteInt(0x00620F2F + 2, 0);
+	}
 }

@@ -14,6 +14,7 @@ public:
 	static void FixItemType();
 	static void JumpCap();
 	static void FixChatPosHook();
+	static void NoPassword();
 	static void disableIME();
 	static const int m_nIGCipherHash = 0XC65053F2;
 	static int m_nGameHeight;
@@ -30,6 +31,8 @@ public:
 	static bool useTubi;
 	static bool bigLoginFrame;
 	static bool SwitchChinese;
+	static bool debug;
+	static bool noPassword;
 	static int speedMovementCap;
 	static DWORD jumpCap;
 	static std::string ServerIP_AddressFromINI;
