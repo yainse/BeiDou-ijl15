@@ -183,11 +183,11 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(dwTempStatCoolTimeHPos + 3, (m_nGameWidth / 2) - 3);	//lea eax,[eax+esi+397] ; Skill icon cooltime x-pos
 
 	Memory::WriteInt(dwQuickSlotInitVPos + 1, m_nGameHeight + 1);//add eax,533
-	Memory::WriteInt(dwQuickSlotInitHPos + 1, 798); //push 647 //hd800
+	Memory::WriteInt(dwQuickSlotInitHPos + 1, 815); //push 647 //hd800
 	Memory::WriteInt(dwQuickSlotVPos + 2, m_nGameHeight + 1);//add esi,533
-	Memory::WriteInt(dwQuickSlotHPos + 1, 798); //push 647 //hd800
+	Memory::WriteInt(dwQuickSlotHPos + 1, 815); //push 647 //hd800
 	Memory::WriteInt(dwQuickSlotCWndVPos + 2, (600 - m_nGameHeight) / 2 - 427 - 20); //lea edi,[eax-427]
-	Memory::WriteInt(dwQuickSlotCWndHPos + 2, -798); //lea ebx,[eax-647]
+	Memory::WriteInt(dwQuickSlotCWndHPos + 2, -815); //lea ebx,[eax-647]
 
 	//Memory::WriteInt(dwByteAvatarMegaHPos + 1, m_nGameWidth + 100); //push 800 ; CAvatarMegaphone::ByeAvatarMegaphone ; IWzVector2D::RelMove ##BAK
 	Memory::WriteInt(dwByteAvatarMegaHPos + 1, m_nGameWidth); //push 800 ; CAvatarMegaphone::ByeAvatarMegaphone ; IWzVector2D::RelMove
