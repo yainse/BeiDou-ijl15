@@ -3,6 +3,7 @@
 #include "codecaves.h"
 #include <cstringt.h>
 #include "FixIme.h"
+#include "FixBuddy.h"
 
 int Client::m_nGameHeight = 720;
 int Client::m_nGameWidth = 1280;
@@ -728,6 +729,8 @@ void Client::Chinese() {
 	else {
 		FixIme::HookNew();
 	}
+
+	FixBuddy::Hook();
 	if(SwitchChinese) {
 		// 聊天栏选项
 		Memory::WriteString(0x00AF2B28, "对联盟     ");
