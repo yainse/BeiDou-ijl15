@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "AddyLocations.h"
 #include "codecaves.h"
-#include <imm.h>
-#pragma comment(lib, "imm32.lib")
+#include <cstringt.h>
+#include "FixIme.h"
 
 int Client::m_nGameHeight = 720;
 int Client::m_nGameWidth = 1280;
@@ -21,6 +21,7 @@ bool Client::SwitchChinese = false;
 int Client::speedMovementCap = 140;
 bool Client::noPassword = false;
 bool Client::debug = false;
+unsigned char Client::imeType = 1;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
 
 void Client::UpdateGameStartup() {
@@ -715,40 +716,18 @@ void Client::UpdateLogin() {	//un-used //may still contain some useful addresses
 	Memory::WriteByte(dwLoginWebRegisterBtn + 1, -127); // x-pos
 }
 
-void Client::EnableChineseInput() {
-	// 中文输入法
-	Memory::FillBytes(0x008D54A6, 0x90, 9); // Key ?
-	Memory::FillBytes(0x00937225, 0x90, 9); // Chat
-	//Memory::FillBytes(0x009E85FC, 0x90, 2); // IME
-	
-	Memory::CodeCave(fixIME4, 0x004CA089, 6); // 单行
-	Memory::CodeCave(fixIME5, 0x004DFEA4, 9); // 销毁
-	Memory::WriteByte(0x004D32D9 + 1, 1); // 多行输入
-
-	Memory::FillBytes(0x00531EE8, 0x90, 9); // Group Message
-	// 剪贴板支持中文
-	Memory::FillBytes(0x004CAE7D, 0x90, 2);
-	Memory::WriteByte(0x004CAE8F, 0xEB);
-	// 角色名中文检测
-	Memory::FillBytes(0x007A015D, 0x90, 2);
-}
-
-void Client::disableIME() {
-	HWND hwnd = GetForegroundWindow();
-	if (hwnd) {
-		HIMC hImc = ImmGetContext(hwnd);
-		if (hImc) {
-			ImmAssociateContext(hwnd, NULL);
-			ImmReleaseContext(hwnd, hImc);
-		}
-	}
-}
-
 void Client::FixMouseWheel() {
 	Memory::CodeCave(fixMouseWheelHook, 0x009E8090, 5);
 }
 
 void Client::Chinese() {
+	if (Client::imeType == 0)
+	{
+		FixIme::HookOld();
+	}
+	else {
+		FixIme::HookNew();
+	}
 	if(SwitchChinese) {
 		// 聊天栏选项
 		Memory::WriteString(0x00AF2B28, "对联盟     ");

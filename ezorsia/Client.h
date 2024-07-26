@@ -6,7 +6,6 @@ public:
 	static void EnableNewIGCipher();
 	static void UpdateResolution();
 	static void UpdateLogin();
-	static void EnableChineseInput();
 	static void FixMouseWheel();
 	static void Chinese();
 	static void LongQuickSlot();
@@ -15,7 +14,6 @@ public:
 	static void JumpCap();
 	static void FixChatPosHook();
 	static void NoPassword();
-	static void disableIME();
 	static const int m_nIGCipherHash = 0XC65053F2;
 	static int m_nGameHeight;
 	static int m_nGameWidth;
@@ -34,6 +32,7 @@ public:
 	static bool debug;
 	static bool noPassword;
 	static int speedMovementCap;
+	static unsigned char imeType;
 	static DWORD jumpCap;
 	static std::string ServerIP_AddressFromINI;
 };

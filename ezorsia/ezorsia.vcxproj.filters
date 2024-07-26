@@ -141,6 +141,9 @@
     <ClInclude Include="BossHP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FixIme.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -172,5 +175,8 @@
     <ResourceCompile Include="ezorsia.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="config.ini" />
   </ItemGroup>
 </Project>
