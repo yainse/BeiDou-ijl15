@@ -343,6 +343,7 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x008DEB93 + 1, m_nGameHeight - 20);	//push 580
 	Memory::WriteInt(0x008DEE2F + 1, m_nGameHeight - 20);	//push 580
 	Memory::WriteInt(0x008D2765 + 1, m_nGameHeight - 19);	//push 581
+	Memory::WriteInt(0x008DA11C + 1, m_nGameHeight - 19);	//push 581 临时经验条
 	Memory::WriteInt(0x008D29B4 + 1, m_nGameHeight - 19);	//push 581
 	Memory::WriteInt(0x008D8BFE + 1, m_nGameHeight - 19);	//push 581
 	Memory::WriteInt(0x008D937E + 1, m_nGameHeight - 19);	//push 581 //008D9373  move mana bar outline? //ty rynyan
@@ -500,32 +501,32 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x00849E39 + 1, m_nGameHeight - 177); //system menu pop up
 	Memory::WriteInt(0x0084A5B7 + 1, m_nGameHeight - 281); //shortcuts pop up	//0x84A5BD -  System Options "X" Position. if needed
 
-	Memory::WriteInt(0x00522C73 + 1, m_nGameHeight - 92);// ??various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00522E65 + 1, m_nGameHeight - 92); // ??various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x0052307E + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523359 + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523595 + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up //quest complete y axis
-	Memory::WriteInt(0x0052378B + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x0052397D + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523BB1 + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523DA5 + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523FA3 + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x005243DB + 1, m_nGameHeight - 92);// various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523154 + 1, m_nGameHeight - 102);//?? various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00522C73 + 1, m_nGameHeight - 92 - 10);// ??various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00522E65 + 1, m_nGameHeight - 92 - 10); // ??various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x0052307E + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523359 + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523595 + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up //quest complete y axis
+	Memory::WriteInt(0x0052378B + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x0052397D + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523BB1 + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523DA5 + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523FA3 + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x005243DB + 1, m_nGameHeight - 92 - 10);// various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523154 + 1, m_nGameHeight - 102 - 10);//?? various requests like party, guild, friend, family, invites that pop up
 
-	Memory::WriteInt(0x0052418C + 1, m_nGameHeight - 102);//party quest available pop-up y axis		my first address find own my own
+	Memory::WriteInt(0x0052418C + 1, m_nGameHeight - 102 - 10);//party quest available pop-up y axis		my first address find own my own
 
-	Memory::WriteInt(0x00523092 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up	//trade		 //thank you Rain for the width addresses
-	Memory::WriteInt(0x0052336D + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up //Party Invite
-	Memory::WriteInt(0x00522E79 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up //friend request
-	Memory::WriteInt(0x00522C87 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up	// Guild Invite
+	Memory::WriteInt(0x00523092 + 1, 423);// 交易申请气泡x坐标
+	Memory::WriteInt(0x0052336D + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up //Party Invite
+	Memory::WriteInt(0x00522E79 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up //friend request
+	Memory::WriteInt(0x00522C87 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up	// Guild Invite
 	//Memory::WriteInt(0x005235A9 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up	// Quest Complete, currently unneeded as working without it
-	Memory::WriteInt(0x0052379F + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up//??
-	Memory::WriteInt(0x00523991 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up/??
-	Memory::WriteInt(0x00523BC5 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up/??
-	Memory::WriteInt(0x00523DC5 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up// ??
-	Memory::WriteInt(0x00523FB7 + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up// ??
-	Memory::WriteInt(0x005243EF + 1, m_nGameWidth - 942);//various requests like party, guild, friend, family, invites that pop up//??
+	Memory::WriteInt(0x0052379F + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up//??
+	Memory::WriteInt(0x00523991 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up/??
+	Memory::WriteInt(0x00523BC5 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up/??
+	Memory::WriteInt(0x00523DC5 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up// ??
+	Memory::WriteInt(0x00523FB7 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up// ??
+	Memory::WriteInt(0x005243EF + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up//??
 
 	//Memory::WriteInt(0x008D326E + 1, m_nGameHeight - 85); //smol buttoms right of chat box (all - 85 ones)
 	//Memory::WriteInt(0x008D32F5 + 1, m_nGameHeight - 85);
