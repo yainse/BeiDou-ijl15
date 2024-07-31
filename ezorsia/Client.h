@@ -31,6 +31,8 @@ public:
 	static bool SwitchChinese;
 	static bool debug;
 	static bool noPassword;
+	static bool climbSpeedAuto;
+	static float climbSpeed;
 	static int speedMovementCap;
 	static unsigned char imeType;
 	static DWORD jumpCap;

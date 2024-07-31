@@ -22,6 +22,8 @@ bool Client::SwitchChinese = false;
 int Client::speedMovementCap = 140;
 bool Client::noPassword = false;
 bool Client::debug = false;
+bool Client::climbSpeedAuto = false;
+float Client::climbSpeed = 1.0;
 unsigned char Client::imeType = 1;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
 
@@ -857,6 +859,16 @@ void Client::JumpCap() {
 	Memory::CodeCave(customJumpCapHook1, 0x00780797, 10);
 	Memory::CodeCave(customJumpCapHook2, 0x008C42A3, 10);
 	Memory::CodeCave(customJumpCapHook3, 0x0094D942, 5);
+
+
+	Memory::WriteInt(0x009CC6F9 + 2, 0x00C1CF80);
+	if (climbSpeedAuto)
+	{
+		Memory::CodeCave(calcSpeedHook, 0x0094D93C, 6);
+	}
+	else {
+		Memory::WriteDouble(0x00C1CF80, climbSpeed * 3.0);
+	}
 }
 
 void Client::FixChatPosHook() {

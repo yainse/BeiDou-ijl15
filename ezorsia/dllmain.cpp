@@ -46,6 +46,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 			ownCashShopFrame = reader.GetBoolean("optional", "ownCashShopFrame", false);
 			EzorsiaV2WzIncluded = reader.GetBoolean("general", "EzorsiaV2WzIncluded", true);
 			Client::ServerIP_AddressFromINI = reader.Get("general", "ServerIP_Address", "127.0.0.1");
+			Client::climbSpeedAuto = reader.GetBoolean("optional", "climbSpeedAuto", false);
+			Client::climbSpeed = reader.GetFloat("optional", "climbSpeed", 1.0);
 		}
 
 		Hook_CreateMutexA(true); //multiclient //ty darter, angel, and alias!

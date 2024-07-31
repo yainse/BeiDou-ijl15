@@ -1468,3 +1468,33 @@ __declspec(naked) void chatTextPos()
 		jmp chatTextPosRtn
 	}
 }
+
+int curSpeed = 100;
+void calcClimbSpeed() {
+	int speed = curSpeed;
+	speed = speed < 80 ? 80 : speed;
+	speed = speed > Client::speedMovementCap ? Client::speedMovementCap : speed;
+
+	double climbingSpeed = Client::climbSpeed;
+	climbingSpeed = climbingSpeed <= 1.0 ? 1.0 : climbingSpeed;
+	double curClimbSpeed = 3.0 * speed * climbingSpeed / 100;
+	Memory::WriteDouble(0x00C1CF80, curClimbSpeed);
+}
+
+DWORD calcSpeedHookRtn = 0x0094D942;
+__declspec(naked) void calcSpeedHook()
+{
+	__asm {
+		push eax
+		mov eax, [ebp - 10h]
+		mov curSpeed, eax
+		call calcClimbSpeed
+		pop eax
+		cmp     eax, edi
+		jg label_return
+		mov     eax, edi
+
+		label_return :
+		jmp calcSpeedHookRtn
+	}
+}
