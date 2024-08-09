@@ -113,3 +113,23 @@ void Memory::CodeCave(void* ptrCodeCave, const DWORD dwOriginAddress, const int 
 		WriteInt(dwOriginAddress + 1, (int)(((int)ptrCodeCave - (int)dwOriginAddress) - 5)); // [jmp(1 byte)][address(4 bytes)] //this means you need to clear a space of at least 5 bytes (nNOPCount bytes)
 	} __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
+
+ void Memory::MakePageWritable(ULONG ulAddress, ULONG ulSize) {
+    MEMORY_BASIC_INFORMATION* mbi = new MEMORY_BASIC_INFORMATION;
+    VirtualQuery((PVOID)ulAddress, mbi, ulSize);
+    if (mbi->Protect != PAGE_EXECUTE_READWRITE) {
+        ULONG* ulProtect = new unsigned long;
+        VirtualProtect((PVOID)ulAddress, ulSize, PAGE_EXECUTE_READWRITE, ulProtect);
+        delete ulProtect;
+    }
+    delete mbi;
+}
+ void Memory::WriteMemory(ULONG ulAddress, ULONG ulAmount, ...) {
+    va_list va;
+    va_start(va, ulAmount);   
+    MakePageWritable(ulAddress, ulAmount);
+    for (ULONG ulIndex = 0; ulIndex < ulAmount; ulIndex++)
+        *(UCHAR*)(ulAddress + ulIndex) = va_arg(va, UCHAR);
+
+    va_end(va);
+}

@@ -24,6 +24,8 @@ bool Client::noPassword = false;
 bool Client::debug = false;
 bool Client::climbSpeedAuto = false;
 float Client::climbSpeed = 1.0;
+bool Client::zeroPointArrowFlag = false;
+
 unsigned char Client::imeType = 1;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
 
@@ -884,4 +886,14 @@ void Client::NoPassword() {
 	{
 		Memory::WriteInt(0x00620F2F + 2, 0);
 	}
+}
+
+void Client::ZeroPointArrow()
+{
+	if (Client::zeroPointArrowFlag)
+	{
+		Memory::WriteMemory(0x009516C2, 2, 0x0F, 0x89);
+	}
+
+
 }

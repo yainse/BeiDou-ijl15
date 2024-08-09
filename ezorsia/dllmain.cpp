@@ -48,6 +48,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 			Client::ServerIP_AddressFromINI = reader.Get("general", "ServerIP_Address", "127.0.0.1");
 			Client::climbSpeedAuto = reader.GetBoolean("optional", "climbSpeedAuto", false);
 			Client::climbSpeed = reader.GetFloat("optional", "climbSpeed", 1.0);
+			Client::zeroPointArrowFlag= reader.GetBoolean("optional", "zeroPointArrow", false);
 		}
 
 		Hook_CreateMutexA(true); //multiclient //ty darter, angel, and alias!
@@ -81,6 +82,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::JumpCap();
 		Client::FixChatPosHook();
 		Client::NoPassword();
+		Client::ZeroPointArrow();
 		BossHP::Hook();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;
