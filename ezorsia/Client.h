@@ -37,4 +37,7 @@ public:
 	static unsigned char imeType;
 	static DWORD jumpCap;
 	static std::string ServerIP_AddressFromINI;
+	static int serverIP_Port;
+	static bool talkRepeat;
+	static int talkTime;
 };

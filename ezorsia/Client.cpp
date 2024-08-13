@@ -26,6 +26,9 @@ bool Client::climbSpeedAuto = false;
 float Client::climbSpeed = 1.0;
 unsigned char Client::imeType = 1;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
+int Client::serverIP_Port = 8484;
+bool Client::talkRepeat = false;
+int Client::talkTime = 2000;
 
 void Client::UpdateGameStartup() {
 	//Memory::CodeCave(cc0x0044E550, dw0x0044E550, dw0x0044E550Nops); //run from packed client //skip //sub_44E546
@@ -130,6 +133,7 @@ void Client::UpdateGameStartup() {
 	Memory::WriteString(0x00AFE084, serverIP_Address);//write the user-set IP address
 	Memory::WriteString(0x00AFE084 + 16, serverIP_Address);//write the user-set IP address
 	Memory::WriteString(0x00AFE084 + 32, serverIP_Address);//write the user-set IP address
+	Memory::WriteInt(0x007519C1 + 1, serverIP_Port);//登录端口
 
 	//optional non-resolution related stuff
 	if (useTubi) { Memory::FillBytes(0x00485C32, 0x90, 2); }
@@ -877,6 +881,17 @@ void Client::FixChatPosHook() {
 	// Memory::WriteByte(0x008DD067 + 2, 0x3);
 	// 老方法导致收起聊天框时，显示的信息太偏下了
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
+
+	Memory::WriteInt(0x009A3D81, 480);
+
+	Memory::CodeCave(faceHairCave, 0x005C94F3, 18);
+	Memory::CodeCave(canSendPkgTimeCave, 0x00485C28, 10);
+
+	if (talkRepeat)
+	{
+		Memory::WriteByte(0x004905ED + 1, 5);
+	}
+	Memory::WriteInt(0x0049064B + 2, talkTime);
 }
 
 void Client::NoPassword() {

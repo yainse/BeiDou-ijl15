@@ -1498,3 +1498,40 @@ __declspec(naked) void calcSpeedHook()
 		jmp calcSpeedHookRtn
 	}
 }
+
+DWORD faceRtn = 0x005C95BF;
+DWORD hairRtn = 0x005C958D;
+DWORD faceHairCaveRtn = 0x005C9505;
+__declspec(naked) void faceHairCave()
+{
+	__asm {
+		cmp  eax, 2
+		jz label_face
+		cmp  eax, 3
+		jz label_hair
+		cmp  eax, 4
+		jz label_hair
+		cmp  eax, 5
+		jz label_face
+		cmp  eax, 6
+		jz label_hair
+
+		jmp faceHairCaveRtn
+
+		label_face:
+		jmp faceRtn
+
+		label_hair:
+		jmp hairRtn
+	}
+}
+
+DWORD canSendPkgTimeCaveRtn = 0x00485C32;
+__declspec(naked) void canSendPkgTimeCave()
+{
+	__asm {
+		sub eax, [esi + 20A8h]
+		cmp eax, 200
+		jmp canSendPkgTimeCaveRtn
+	}
+}
