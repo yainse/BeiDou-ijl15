@@ -26,6 +26,8 @@ bool Client::climbSpeedAuto = false;
 float Client::climbSpeed = 1.0;
 unsigned char Client::imeType = 1;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
+DWORD skillup_btn_Array[48];
+unsigned char shop_btn_Array[80];
 
 void Client::UpdateGameStartup() {
 	//Memory::CodeCave(cc0x0044E550, dw0x0044E550, dw0x0044E550Nops); //run from packed client //skip //sub_44E546
@@ -529,6 +531,99 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x00523DC5 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up// ??
 	Memory::WriteInt(0x00523FB7 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up// ??
 	Memory::WriteInt(0x005243EF + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up//??
+
+
+	//调整技能栏为6个
+	Memory::WriteByte(0x008AA86F + 1, 0x73); // Extend rendering area to fit modified wz
+	Memory::WriteByte(0x008AACD5 + 1, 0xF0); // Extends scrollbar
+	Memory::WriteByte(0x008AAE23 + 1, 0x59); // Moves Macro button down
+
+	Memory::WriteByte(0x008AD9F2 + 2, 0x4F); // Draw extra tooltips
+	Memory::WriteByte(0x008ACE76 + 3, 0x66); // Draw Extra icons
+	Memory::WriteByte(0x008AD7B4 + 2, 0xFB); // Scrollbar Fix
+	Memory::WriteByte(0x008AC4DF + 1, 0x5B); // Skillpoints Y offset
+	Memory::WriteByte(0x008AADAC + 3, 0x67); // Level-up buttons expanded
+	Memory::WriteByte(0x008AB929 + 2, 0xE0); // Makes new buttons clickable
+
+	Memory::WriteByte(0x008AD903 + 2, 0x06); // Increases buttons to be read in SetButton
+	Memory::WriteByte(0x008AD7F8 + 2, 0x06); // Increases buttons to be read in SetButton
+
+	//CUISkill::OnCreate
+	Memory::WriteByte(0x008AAD3C + 1, 5); //lea eax
+	Memory::WriteInt(0x008AAD3C + 2, (DWORD)&skillup_btn_Array + 12);
+
+	//CUISKill::SetButton
+	Memory::WriteByte(0x008AD920 + 1, 0x34); // lea ecx, [eax*8..
+	Memory::WriteByte(0x008AD920 + 2, 0xC5); // lea ecx, [eax*8..
+	Memory::WriteInt(0x008AD920 + 3, (DWORD)&skillup_btn_Array + 12); //..Array]
+
+
+	//扩展商店
+	Memory::WriteByte(0x00753DB8 + 1, 0x64); // Vendor Scrollbar
+	Memory::WriteByte(0x00753DB8 + 2, 0x01);
+	Memory::WriteByte(0x00754719 + 2, 0xF8); // Scrollbar Fix
+
+	Memory::WriteByte(0x00753E19 + 1, 0x64); //Player Scrollbar
+	Memory::WriteByte(0x00753E19 + 2, 0x01);
+	Memory::WriteByte(0x0075474B + 2, 0xF8); // Scrollbar Fix
+
+	Memory::WriteByte(0x00755748 + 3, 0xDE); // Drawing Vendor Items
+
+	Memory::WriteByte(0x00755E44 + 2, 0x09); //Drawing Player Items
+
+	Memory::WriteByte(0x007560D5 + 3, 0xDE); // Vendor    Item Tooltips
+	Memory::WriteByte(0x00756197 + 3, 0xDE); // Player Item Tooltips
+
+	Memory::WriteByte(0x007540A3 + 1, 0xD8); // Fix Rechargeable items in the bottom 4 slots
+	// Array References
+	Memory::WriteByte(0x007557D6, 0xB8);
+	Memory::WriteInt(0x007557D6 + 1, (DWORD)&shop_btn_Array);
+	Memory::WriteByte(0x007557D6 + 5, 0x90);
+
+	Memory::WriteByte(0x00755A2A, 0xB8);
+	Memory::WriteInt(0x00755A2A + 1, (DWORD)&shop_btn_Array);
+	Memory::WriteByte(0x00755A2A + 5, 0x90);
+
+	Memory::WriteByte(0x00755ACC, 0xB8);
+	Memory::WriteInt(0x00755ACC + 1, (DWORD)&shop_btn_Array);
+	Memory::WriteByte(0x00755ACC + 5, 0x90);
+
+	Memory::WriteByte(0x00755B0B, 0xB8);
+	Memory::WriteInt(0x00755B0B + 1, (DWORD)&shop_btn_Array);
+	Memory::WriteByte(0x00755B0B + 5, 0x90);
+
+	Memory::WriteByte(0x00755AB9, 0xB9);
+	Memory::WriteInt(0x00755AB9 + 1, (DWORD)&shop_btn_Array);
+	Memory::WriteByte(0x00755AB9 + 5, 0x90);
+
+	//扩展仓库
+	// Draw Icons in Trunk Inv
+	Memory::WriteByte(0x007C7C27 + 3, 0xC9);
+	// Draw Tooltips in Trunk Inv
+	Memory::WriteByte(0x007C82C3 + 3, 0xBF);
+	// Draw Icons in Player inv
+	Memory::WriteByte(0x007C8035 + 3, 0xC9);
+	// Draw Tooltips in Plaer Inv
+	Memory::WriteByte(0x007C8385 + 3, 0xBF);
+	// Storage Meso Button Y
+	Memory::WriteByte(0x007C65B6 + 1, 0xC6);
+	// Player Meso Button 
+	Memory::WriteByte(0x007C6631 + 1, 0xC6);
+	// Player and Merchant Mesos Y offset
+	Memory::WriteByte(0x007C8197 + 1, 0xC8);
+	//Merchant Scrollbar Length
+	Memory::WriteByte(0x007C69DC + 1, 0x64);
+	Memory::WriteByte(0x007C69DC + 2, 0x01);
+	Memory::WriteByte(0x007C70B3 + 2, 0xF9); // Scrollbar Fix, ty Angel
+	//Player Scrollbar Length
+	Memory::WriteByte(0x007C6A3A + 1, 0x40);
+	Memory::WriteByte(0x007C6A3A + 2, 0x01);
+	Memory::WriteByte(0x007C7081 + 2, 0xF8); // Scrollbar Fix, ty Angel
+	Memory::WriteByte(0x007C6681 + 1, 0x5F); // Tabs Y
+	Memory::WriteByte(0x007C69FF + 3, 0xD0); // Merchant Scrollbar Area Fix
+	Memory::WriteByte(0x007C6A59 + 3, 0xD0); // Player Scrollbar Area Fix
+
+
 
 	//Memory::WriteInt(0x008D326E + 1, m_nGameHeight - 85); //smol buttoms right of chat box (all - 85 ones)
 	//Memory::WriteInt(0x008D32F5 + 1, m_nGameHeight - 85);
