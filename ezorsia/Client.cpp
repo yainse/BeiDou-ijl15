@@ -623,6 +623,19 @@ void Client::UpdateResolution() {
 	Memory::WriteByte(0x007C69FF + 3, 0xD0); // Merchant Scrollbar Area Fix
 	Memory::WriteByte(0x007C6A59 + 3, 0xD0); // Player Scrollbar Area Fix
 
+	//发型和脸扩容
+	Memory::CodeCave(faceHairCave, 0x005C94F3, 18);
+
+	//能力栏扩容
+	Memory::WriteInt(0x008C485A + 1, 192);
+	Memory::WriteInt(0x008C4AB3 + 1, 208);
+	Memory::WriteInt(0x008C510A + 1, 218);
+	Memory::WriteInt(0x008C4EA2 + 1, 208);
+	Memory::WriteInt(0x008C5760 + 1, 208);
+	Memory::WriteInt(0x008C6C72 + 1, 208);
+	Memory::WriteInt(0x008C7AD9 + 1, 185);
+	Memory::WriteInt(0x008C2754 + 1, 195);
+	Memory::CodeCave(apDetailBtn, 0x008C4E1B, 7);
 
 
 	//Memory::WriteInt(0x008D326E + 1, m_nGameHeight - 85); //smol buttoms right of chat box (all - 85 ones)
