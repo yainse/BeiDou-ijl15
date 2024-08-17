@@ -12,6 +12,8 @@ public:
 	static void WriteDouble(DWORD dwOriginAddress, double dwValue);
 	static void CodeCave(void* ptrCodeCave, DWORD dwOriginAddress, int nNOPCount);
 	static void WriteByteArray(DWORD dwOriginAddress, unsigned char* ucValue, const int ucValueSize);
+	static void MakePageWritable(ULONG ulAddress, ULONG ulSize);
+	static void WriteMemory(ULONG ulAddress, ULONG ulAmount, ...);
 	static bool UseVirtuProtect;
 };
 
