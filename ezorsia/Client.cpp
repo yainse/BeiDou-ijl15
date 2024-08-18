@@ -378,7 +378,6 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x00954433 + 1, (unsigned int)floor(-m_nGameHeight / 2));	//push -300 ;
 	Memory::WriteInt(0x00981555 + 1, (unsigned int)floor(-m_nGameHeight / 2));	//push -300 ;
 	Memory::WriteInt(0x00981F7A + 2, (unsigned int)floor(-m_nGameHeight / 2));	//push -300 ;
-	Memory::WriteInt(0x00A448B0 + 2, (unsigned int)floor(-m_nGameHeight / 2));	//push -300 ; CWvsPhysicalSpace2D::Load]
 
 	Memory::WriteInt(0x0066BACE + 2, (unsigned int)floor(-m_nGameWidth / 2));		//and ecx,-400
 	Memory::WriteInt(0x009B76BD + 3, (unsigned int)floor(-m_nGameHeight / 2));	//push -300
@@ -881,7 +880,16 @@ void Client::FixChatPosHook() {
 	// Memory::WriteByte(0x008DD067 + 2, 0x3);
 	// 老方法导致收起聊天框时，显示的信息太偏下了
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
+}
 
+void Client::NoPassword() {
+	if (noPassword && debug)
+	{
+		Memory::WriteInt(0x00620F2F + 2, 0);
+	}
+}
+
+void Client::MoreHook() {
 	Memory::WriteInt(0x009A3D81, 480);
 
 	Memory::CodeCave(faceHairCave, 0x005C94F3, 18);
@@ -892,11 +900,19 @@ void Client::FixChatPosHook() {
 		Memory::WriteByte(0x004905ED + 1, 5);
 	}
 	Memory::WriteInt(0x0049064B + 2, talkTime);
-}
 
-void Client::NoPassword() {
-	if (noPassword && debug)
+	if (setAtkOutCap > 999999)
 	{
-		Memory::WriteInt(0x00620F2F + 2, 0);
+		Memory::WriteInt(0x008C485A + 1, 192); // 面板关闭按钮x
+		Memory::WriteInt(0x008C4AB3 + 1, 210); // 面板宽度
+		Memory::WriteInt(0x008C510A + 1, 218); // 详情面板宽度
+		Memory::WriteInt(0x008C4EA2 + 1, 210); // 详情面板初始x
+		Memory::WriteInt(0x008C5760 + 1, 210); // 详情面板切换x
+		Memory::WriteInt(0x008C7AD9 + 1, 185); // 加属性按钮x
+		Memory::WriteInt(0x008C2754 + 1, 195); // 详情面板关闭按钮x
+		Memory::WriteInt(0x008C6C72 + 1, 210); // 移动时详情面板x
+		Memory::CodeCave(apDetailBtn, 0x008C4E1B, 7); // 详情按钮
 	}
+	// 喇叭
+	Memory::WriteInt(0x0045A5BE + 1, 9999);
 }

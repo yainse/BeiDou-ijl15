@@ -84,6 +84,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::JumpCap();
 		Client::FixChatPosHook();
 		Client::NoPassword();
+		Client::MoreHook();
 		BossHP::Hook();
 
 		std::cout << "GetModuleFileName hook created" << std::endl;

@@ -14,6 +14,7 @@ public:
 	static void JumpCap();
 	static void FixChatPosHook();
 	static void NoPassword();
+	static void MoreHook();
 	static const int m_nIGCipherHash = 0XC65053F2;
 	static int m_nGameHeight;
 	static int m_nGameWidth;

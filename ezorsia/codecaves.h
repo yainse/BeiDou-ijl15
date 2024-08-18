@@ -1535,3 +1535,13 @@ __declspec(naked) void canSendPkgTimeCave()
 		jmp canSendPkgTimeCaveRtn
 	}
 }
+
+DWORD apDetailBtnRtn = 0x008C4E22;
+__declspec(naked) void apDetailBtn()
+{
+	__asm {
+		push    144h
+		push    99h
+		jmp apDetailBtnRtn
+	}
+}
